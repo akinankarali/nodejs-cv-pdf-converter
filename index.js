@@ -119,6 +119,13 @@ app.post('/generate-cv', async (req, res) => {
     // Şablon seç ve HTML oluştur
     const html = await templateService.generateHTML(type, cvData);
     
+    // Vercel ortamı kontrolü
+    if (process.env.VERCEL) {
+      // Vercel'de PDF oluşturmak yerine HTML döndür
+      res.setHeader('Content-Type', 'text/html');
+      return res.send(html);
+    }
+    
     // HTML'i PDF'e dönüştür
     const pdf = await pdfService.convertHTMLToPDF(html);
     
@@ -450,6 +457,15 @@ fetch('http://localhost:${port}/generate-cv', {
       </body>
     </html>
   `);
+});
+
+// Vercel üzerindeki API için özelleştirilmiş endpoint
+app.get('/api/status', (req, res) => {
+  res.json({
+    status: 'online',
+    environment: process.env.NODE_ENV || 'development',
+    vercel: process.env.VERCEL === '1' ? true : false
+  });
 });
 
 // Sunucuyu başlat
