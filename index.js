@@ -119,13 +119,6 @@ app.post('/generate-cv', async (req, res) => {
     // Şablon seç ve HTML oluştur
     const html = await templateService.generateHTML(type, cvData);
     
-    // Vercel ortamı kontrolü
-    if (process.env.VERCEL) {
-      // Vercel'de PDF oluşturmak yerine HTML döndür
-      res.setHeader('Content-Type', 'text/html');
-      return res.send(html);
-    }
-    
     // HTML'i PDF'e dönüştür
     const pdf = await pdfService.convertHTMLToPDF(html);
     
@@ -186,7 +179,6 @@ app.post('/convert-html', async (req, res) => {
     
     // PDF'i gönder
     res.contentType('application/pdf');
-    // İndirilebilir dosya için header ekle
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     res.send(pdf);
   } catch (error) {
@@ -366,6 +358,35 @@ app.get('/templates', (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/status:
+ *   get:
+ *     summary: Servis durumunu kontrol eder
+ *     description: API'nin çalışma durumu hakkında bilgi verir
+ *     responses:
+ *       200:
+ *         description: Servis durumu
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                 environment:
+ *                   type: string
+ *                 uptime:
+ *                   type: number
+ */
+app.get('/api/status', (req, res) => {
+  res.json({
+    status: 'online',
+    environment: process.env.NODE_ENV || 'development',
+    uptime: process.uptime()
+  });
+});
+
 // Ana sayfa için bilgilendirme
 app.get('/', (req, res) => {
   res.send(`
@@ -457,15 +478,6 @@ fetch('http://localhost:${port}/generate-cv', {
       </body>
     </html>
   `);
-});
-
-// Vercel üzerindeki API için özelleştirilmiş endpoint
-app.get('/api/status', (req, res) => {
-  res.json({
-    status: 'online',
-    environment: process.env.NODE_ENV || 'development',
-    vercel: process.env.VERCEL === '1' ? true : false
-  });
 });
 
 // Sunucuyu başlat

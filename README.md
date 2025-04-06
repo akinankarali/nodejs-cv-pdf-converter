@@ -33,51 +33,45 @@ Temel endpoint'ler:
 - `GET /convert-url`: Belirtilen URL'deki sayfayı PDF'e dönüştürür
 - `GET /templates`: Mevcut şablonları listeler
 
-## Canlı Ortama Alma
+## DigitalOcean App Platform'da Kurulum
 
-### Heroku
+### Doğrudan Deployment
+1. DigitalOcean hesabı oluşturun (veya giriş yapın)
+2. App Platform > Create App seçeneğine tıklayın
+3. GitHub veya GitLab üzerinden repo'nuzu bağlayın
+4. Node.js servis türünü seçin
+5. Aşağıdaki ayarları yapın:
+   - HTTP port: 3001
+   - Environment Variables:
+     - NODE_ENV: production
+     - PORT: 3001
+6. "Deploy to Production" butonuna tıklayın
+
+### Docker ile Deployment
+1. Bu repo'yu GitHub'a push edin
+2. DigitalOcean'da Container Registry oluşturun
+3. Aşağıdaki komutları kullanarak Docker imajını oluşturun ve push edin:
 
 ```bash
-# Heroku CLI yükleyin
-# Git repo oluşturun
-git init
-git add .
-git commit -m "İlk commit"
+# Docker imajı oluştur
+docker build -t registry.digitalocean.com/your-registry/cv-pdf-service:latest .
 
-# Heroku app oluşturun
-heroku create cv-pdf-servis
+# DigitalOcean'a giriş yap
+doctl auth init
+doctl registry login
 
-# Buildpack ekleyin (Puppeteer için gerekli)
-heroku buildpacks:add https://github.com/jontewks/puppeteer-heroku-buildpack.git
-heroku buildpacks:add heroku/nodejs
-
-# Deploy edin
-git push heroku main
+# İmajı push et
+docker push registry.digitalocean.com/your-registry/cv-pdf-service:latest
 ```
 
-### Render
-
-1. Render.com'da yeni bir Web Service oluşturun
-2. GitHub repo'nuzu bağlayın
-3. Aşağıdaki ayarları yapın:
-   - Build Command: `npm install`
-   - Start Command: `npm start`
-   - Environment Variables:
-     - `PORT`: 10000
-     - `NODE_ENV`: production
-
-### DigitalOcean App Platform
-
-1. DigitalOcean Dashboard'da "Create App" seçin
-2. GitHub repo'nuzu bağlayın
-3. HTTP port'unu 3001 olarak ayarlayın
-4. Environment variables bölümünde PORT değişkenini tanımlayın
+4. App Platform > Create App > Docker Hub/Container Registry seçeneğine tıklayın
+5. Oluşturduğunuz imajı seçin ve deploy edin
 
 ## Ortam Değişkenleri
 
 - `PORT`: API'nin çalışacağı port (default: 3001)
+- `NODE_ENV`: Çalışma ortamı (development/production)
 - `API_URL`: Swagger dokümantasyonu için API URL'si
-- `PUPPETEER_EXECUTABLE_PATH`: Bazı bulut platformları için özel Chrome yolu
 
 ## Lisans
 
