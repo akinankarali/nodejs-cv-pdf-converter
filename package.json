@@ -1,0 +1,30 @@
+{
+  "name": "cv-pdf-service",
+  "version": "1.0.0",
+  "description": "CV şablonlarını PDF formatına dönüştüren bir servis",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "cv",
+    "pdf",
+    "converter",
+    "puppeteer"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^8.1.0",
+    "puppeteer": "^21.4.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

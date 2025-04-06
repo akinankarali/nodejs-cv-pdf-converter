@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Örnek CV Şablonu</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 32px;
+        }
+        .header p {
+            margin: 5px 0;
+            color: #7f8c8d;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section h2 {
+            color: #3498db;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        .experience, .education {
+            margin-bottom: 15px;
+        }
+        .experience .title, .education .degree {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .experience .company, .education .school {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        .experience .date, .education .date {
+            float: right;
+            color: #95a5a6;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .skill {
+            background: #ecf0f1;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Mehmet Yılmaz</h1>
+        <p>Yazılım Geliştirici</p>
+        <p>mehmet.yilmaz@ornek.com | +90 555 123 4567</p>
+        <p>İstanbul, Türkiye</p>
+    </div>
+    
+    <div class="section">
+        <h2>Özet</h2>
+        <p>5+ yıl deneyimli full-stack web geliştirici. Modern JavaScript framework'leri ve backend teknolojileri konusunda uzmanlık. Ölçeklenebilir ve performanslı web uygulamaları geliştirme konusunda geniş deneyim.</p>
+    </div>
+    
+    <div class="section">
+        <h2>İş Deneyimi</h2>
+        
+        <div class="experience">
+            <div class="date">2020 - Günümüz</div>
+            <div class="title">Kıdemli Yazılım Geliştirici</div>
+            <div class="company">ABC Teknoloji A.Ş.</div>
+            <p>Mikroservis mimarisi ile büyük ölçekli e-ticaret platformları geliştirdim. React ve Node.js kullanarak yüksek performanslı, SEO dostu uygulamalar tasarladım.</p>
+        </div>
+        
+        <div class="experience">
+            <div class="date">2018 - 2020</div>
+            <div class="title">Yazılım Geliştirici</div>
+            <div class="company">XYZ Yazılım Ltd.</div>
+            <p>Angular ve .NET Core ile fintech uygulamaları geliştirdim. REST API tasarımı ve güvenlik protokolleri konusunda uzmanlaştım.</p>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Eğitim</h2>
+        
+        <div class="education">
+            <div class="date">2014 - 2018</div>
+            <div class="degree">Bilgisayar Mühendisliği Lisans</div>
+            <div class="school">İstanbul Teknik Üniversitesi</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Beceriler</h2>
+        <div class="skills">
+            <div class="skill">JavaScript</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
+            <div class="skill">TypeScript</div>
+            <div class="skill">Angular</div>
+            <div class="skill">Express</div>
+            <div class="skill">MongoDB</div>
+            <div class="skill">PostgreSQL</div>
+            <div class="skill">Git</div>
+            <div class="skill">Docker</div>
+            <div class="skill">AWS</div>
+        </div>
+    </div>
+</body>
+</html> 
